@@ -1,0 +1,54 @@
+body {
+    background: none !important;
+}
+
+#container {
+    font-size: 20px;
+    padding: 25px;
+    color: white;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(44, 44, 44);
+    height: 290px;
+    width: 550px;
+    border: 2px solid aliceblue;
+    border-radius: 7px;
+}
+
+#container2 {
+    font-size: 20px;
+    padding: 25px;
+    color: white;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(44, 44, 44);
+    height: 290px;
+    width: 550px;
+    border: 2px solid aliceblue;
+    border-radius: 7px;
+}
+
+button {
+    background-color: aliceblue;
+    padding: 12px;
+    border-radius: 12px;
+}
+
+input {
+    margin-bottom: 5px;
+    width: 100%;
+    font-size: 15px;
+    padding: 12px;
+}
+
+#tunerbtn {
+    float: right;
+}
+
+#close {
+    float: right;
+}

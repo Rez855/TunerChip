@@ -1,0 +1,182 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="reset.css" type="text/css">
+    <link rel="stylesheet" href="index.css" type="text/css">
+    <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-dragdata@latest/dist/chartjs-plugin-dragdata.min.js"></script>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        
+        canvas {
+            background-color: #D3D3D3;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+            <!--<input placeholder="Type here" id="input"></input>
+                <br>
+                <button id="submit" type="submit">Submit</button>
+                <p id="rpm">RPM: </p>
+                <p id="speed">Speed: </p> -->
+            
+            
+            <div id="tuner">
+              <button id="tune">Flash Tune</button>
+              <button id="close">Close</button>
+              <canvas id="chartJSContainer" style="height: 80px; width: 180px;"></canvas>
+              <script>
+                  var options = {
+                      type: 'line',
+                      data: {
+                          labels: ["1500", "2000", "2500", "3000", "3500", "4000", "4500", "5000", "5500", "6000", "6500", "7000", "7500"],
+                          datasets: [{
+                              label: 'Fuel',
+                              data: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0],
+                              borderWidth: 1,
+                              pointHitRadius: 25,
+                              backgroundColor: [
+                                  'rgba(255, 99, 132, 0.2)',
+                                  'rgba(54, 162, 235, 0.2)',
+                                  'rgba(255, 206, 86, 0.2)',
+                                  'rgba(75, 192, 192, 0.2)',
+                                  'rgba(153, 102, 255, 0.2)',
+                                  'rgba(255, 159, 64, 0.2)'
+                              ],
+                              borderColor: [
+                                  'rgba(255,99,132,1)',
+                                  'rgba(54, 162, 235, 1)',
+                                  'rgba(255, 206, 86, 1)',
+                                  'rgba(75, 192, 192, 1)',
+                                  'rgba(153, 102, 255, 1)',
+                                  'rgba(255, 159, 64, 1)'
+                              ],
+                              borderWidth: 1
+                          }, ]
+                      },
+                      options: {
+                          scales: {
+                              yAxes: [{
+                                  ticks: {
+                                      reverse: false,
+                                      min: 0,
+                                      max: 2
+                                  }
+                              }]
+                          },
+                          dragData: true,
+                          dragDataRound: 2,
+                          dragOptions: {
+                              showTooltip: true
+                          },
+                          onDragStart: function(e) {
+                              // console.log(e)
+                          },
+                          onDrag: function(e, datasetIndex, index, value) {
+                              e.target.style.cursor = 'grabbing'
+                                  // console.log(datasetIndex, index, value)
+                          },
+                          onDragEnd: function(e, datasetIndex, index, value) {
+                              e.target.style.cursor = 'default'
+                                  // console.log(datasetIndex, index, value)
+                          },
+                          hover: {
+                              onHover: function(e) {
+                                  const point = this.getElementAtEvent(e)
+                                  if (point.length) e.target.style.cursor = 'grab'
+                                  else e.target.style.cursor = 'default'
+                              }
+                          }
+                      }
+                  }
+
+                  var ctx = document.getElementById('chartJSContainer').getContext('2d');
+                  var myChart = new Chart(ctx, options);
+              </script>
+            </div>
+            <div id="log">
+              <button id="close2">Close</button>
+              <canvas id="chartJSContainer2" style="height: 80px; width: 180px;"></canvas>
+              <script>
+                  var options2 = {
+                      type: 'line',
+                      data: {
+                          labels: ["1500", "2000", "2500", "3000", "3500", "4000", "4500", "5000", "5500", "6000", "6500", "7000", "7500"],
+                          datasets: [{
+                              label: 'Air/Fuel Ratio',
+                              data: [14.5, 14.5, 14.5, 14.5, 14.5, 14.5, 14.5, 14.5, 14.5, 14.5, 14.5, 14.5, 14.5],
+                              borderWidth: 1,
+                              pointHitRadius: 25,
+                              backgroundColor: [
+                                  'rgba(255, 99, 132, 0.2)',
+                                  'rgba(54, 162, 235, 0.2)',
+                                  'rgba(255, 206, 86, 0.2)',
+                                  'rgba(75, 192, 192, 0.2)',
+                                  'rgba(153, 102, 255, 0.2)',
+                                  'rgba(255, 159, 64, 0.2)'
+                              ],
+                              borderColor: [
+                                  'rgba(255,99,132,1)',
+                                  'rgba(54, 162, 235, 1)',
+                                  'rgba(255, 206, 86, 1)',
+                                  'rgba(75, 192, 192, 1)',
+                                  'rgba(153, 102, 255, 1)',
+                                  'rgba(255, 159, 64, 1)'
+                              ],
+                              borderWidth: 1
+                          }, ]
+                      },
+                      options: {
+                          scales: {
+                              yAxes: [{
+                                  ticks: {
+                                      reverse: false,
+                                      min: 0,
+                                      max: 25
+                                  }
+                              }]
+                          },
+                          dragData: false,
+                          dragDataRound: 1,
+                          dragOptions: {
+                              showTooltip: true
+                          },
+                          onDragStart: function(e) {
+                              // console.log(e)
+                          },
+                          onDrag: function(e, datasetIndex, index, value) {
+                              e.target.style.cursor = 'grabbing'
+                                  // console.log(datasetIndex, index, value)
+                          },
+                          onDragEnd: function(e, datasetIndex, index, value) {
+                              e.target.style.cursor = 'default'
+                                  // console.log(datasetIndex, index, value)
+                          },
+                          hover: {
+                              onHover: function(e) {
+                                  const point = this.getElementAtEvent(e)
+                                  if (point.length) e.target.style.cursor = 'grab'
+                                  else e.target.style.cursor = 'default'
+                              }
+                          }
+                      }
+                  }
+
+                  var ctx2 = document.getElementById('chartJSContainer2').getContext('2d');
+                  var myChart2 = new Chart(ctx2, options2);
+              </script>
+            </div>
+    </div>
+
+    <script src="./index.js" type="text/javascript"></script>
+</body>
+
+</html>
