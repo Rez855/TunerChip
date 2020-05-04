@@ -296,7 +296,7 @@ Citizen.CreateThread(function()
                 local rpm = GetVehicleCurrentRpm(GetVehiclePedIsIn(GetPlayerPed(-1), false))
                 text("RPM: " .. math.floor(GetVehicleRPM(GetVehiclePedIsIn(GetPlayerPed(-1), false)) / 500 + 0.5)*500, 0.8, 0.5)
                 text("AF Ratio: " .. math.floor(CalculateVehicleAFRatio(GetVehiclePedIsIn(GetPlayerPed(-1), false), tuneFile)*100)/100, 0.8, 0.7)
-                text("Boost: " .. math.floor(multiplier*100)/100, 0.8, 0.6)
+                --text("Boost: " .. math.floor(multiplier*100)/100, 0.8, 0.6)
             end
         end
     end
