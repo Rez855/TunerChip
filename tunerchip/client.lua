@@ -253,6 +253,21 @@ function text(content, x, y)
     DrawText(x,y)
 end
 
+function GetMultiplier()
+    local afRatio = CalculateVehicleAFRatio(GetVehiclePedIsIn(GetPlayerPed(-1), false), tuneFile)
+    local base = 50
+
+     local multiplier = (afRatio^2 - 25*afRatio + 152.25) / -4
+
+     if(multiplier < 0) then
+         multiplier = 0
+     end
+
+     multiplier = multiplier * base
+	
+    return multiplier
+end
+
 -- Sets cars boost based on tune
 Citizen.CreateThread(function()
     local lastRoundedRPM
@@ -265,19 +280,8 @@ Citizen.CreateThread(function()
 
             if(lastRoundedRPM ~= math.floor(GetVehicleRPM(GetVehiclePedIsIn(GetPlayerPed(-1), false)) / 500 + 0.5)*500) then
                 lastRoundedRPM = math.floor(GetVehicleRPM(GetVehiclePedIsIn(GetPlayerPed(-1), false)) / 500 + 0.5)*500
-                local afRatio = CalculateVehicleAFRatio(GetVehiclePedIsIn(GetPlayerPed(-1), false), tuneFile)
-            
-                -- (x-h)^2=4p(y-k)   formula to find the correct multiplier equation
-                -- https://www.youtube.com/watch?v=_X82bqW0cTM
-                local base = 50
 
-                local multiplier = (afRatio^2 - 25*afRatio + 152.25) / -4
-
-                if(multiplier < 0) then
-                    multiplier = 0
-                end
-
-                multiplier = multiplier * base
+                multiplier = GetMultiplier()
 
                 SetVehicleEnginePowerMultiplier(GetVehiclePedIsIn(GetPlayerPed(-1), false), multiplier)
             end
@@ -296,7 +300,7 @@ Citizen.CreateThread(function()
                 local rpm = GetVehicleCurrentRpm(GetVehiclePedIsIn(GetPlayerPed(-1), false))
                 text("RPM: " .. math.floor(GetVehicleRPM(GetVehiclePedIsIn(GetPlayerPed(-1), false)) / 500 + 0.5)*500, 0.8, 0.5)
                 text("AF Ratio: " .. math.floor(CalculateVehicleAFRatio(GetVehiclePedIsIn(GetPlayerPed(-1), false), tuneFile)*100)/100, 0.8, 0.7)
-                --text("Boost: " .. math.floor(multiplier*100)/100, 0.8, 0.6)
+                text("Boost: " .. math.floor(GetMultiplier()*100)/100, 0.8, 0.6)
             end
         end
     end
